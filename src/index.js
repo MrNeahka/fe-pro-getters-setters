@@ -4,7 +4,7 @@ function Student(name, grades) {
 
   Object.defineProperty(this, 'averageGrade', {
     get() {
-      return this.grades.reduce((acc, curr) => acc + curr) / this.grades.length;
+      return +this.grades.reduce((acc, curr) => acc + curr) / this.grades.length;
     },
   });
 }
@@ -20,4 +20,32 @@ export const school = {
     6: new Student('Eugene', [97, 34, 78, 85, 98, 65]),
     7: new Student('Ivan', [76, 89, 78, 98, 98, 99, 89, 96]),
   },
+
+  function(from, to) {
+    const nameStudents = [];
+    for (let i = 0; i < Object.keys(this.students).length; i++){
+      if (this.students[i].averageGrade > from && this.students[i].averageGrade < to) {
+        nameStudents.push(this.students[i].name);
+      }
+    }
+    return nameStudents.join(', ');
+  },
+
+
+  get aGradeStudents() {
+    return this.function(90, 100);
+  },
+
+  get bGradeStudents() {
+    return this.function(75, 89);
+  },
+
+  get cGradeStudents() {
+    return this.function(60, 75);
+  },
+
+  get dGradeStudents() {
+    return this.function(0, 60);
+  }
+
 };
