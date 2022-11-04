@@ -22,13 +22,12 @@ export const school = {
   },
 
   function(from, to) {
-    const nameStudents = [];
-    for (let i = 0; i < Object.keys(this.students).length; i++){
-      if (this.students[i].averageGrade > from && this.students[i].averageGrade < to) {
-        nameStudents.push(this.students[i].name);
-      }
-    }
-    return nameStudents.join(', ');
+     return Object.entries(this.students).reduce((acc, [, student]) => {
+        if (student.averageGrade > from && student.averageGrade < to){
+          return [...acc, student.name]
+        }
+        return [...acc];
+    }, []).join(', ');
   },
 
 
